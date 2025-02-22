@@ -5,44 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Game Points Tracker</title>
     <style>
+        :root {
+            --background-color: #F5F5F5;
+            --text-color: #111;
+            --accent-color: #E27D3E;
+            --card-bg: #FFFFFF;
+            --border-color: #CCC;
+            --button-bg: #E27D3E;
+            --button-text: #FFFFFF;
+            --input-bg: #EAEAEA;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', sans-serif;
             text-align: center;
-            margin: 20px;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .player-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         .player {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin: 10px 0;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
         }
-        button {
-            margin: 5px;
-            padding: 5px 10px;
-            font-size: 16px;
-        }
-        .controls {
-            margin-bottom: 10px;
-        }
-        .arrow {
+        .player span {
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
+        }
+        .history {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 5px;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .submit-button {
+            font-size: 16px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .submit-button:hover {
+            background-color: #d76b2c;
+        }
+        .points-selection {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .points-selection button, .reset-button {
+            font-size: 18px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .points-selection button:hover, .reset-button:hover {
+            background-color: #d76b2c;
+        }
+        .points-selection input {
+            width: 80px;
             font-size: 20px;
-            padding: 5px;
+            text-align: center;
+            background-color: var(--input-bg);
+            border: none;
+            border-radius: 6px;
+            padding: 8px;
+            -moz-appearance: textfield;
+        }
+        .points-selection input::-webkit-outer-spin-button,
+        .points-selection input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        p#scoreLabel {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
     <h1>Card Game Points Tracker</h1>
-    <div class="controls">
-        <input type="number" id="pointValue" placeholder="Enter points" min="-15" max="15">
-        <button onclick="addPlayer()">+ Add Player</button>
-        <button onclick="removePlayer()">- Remove Player</button>
+    <div class="container">
+        <div class="controls">
+            <button onclick="addPlayer()">+ Add Player</button>
+            <button onclick="removePlayer()">- Remove Player</button>
+            <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        </div>
+        <div class="player-container" id="playersList"></div>
+        <div class="points-selection">
+            <button onclick="adjustPoints(-1)">-</button>
+            <input type="number" id="pointValue" value="0" min="-15" max="20" oninput="updateScoreLabel()">
+            <button onclick="adjustPoints(1)">+</button>
+        </div>
+        <p id="scoreLabel">STRAIGHT</p>
     </div>
-    <div id="playersList"></div>
-    <button onclick="resetScores()" style="margin-top: 20px; background-color: red; color: white;">Reset Scores</button>
-
     <script>
         let players = JSON.parse(localStorage.getItem('players')) || [];
 
@@ -54,21 +150,22 @@
             const playersList = document.getElementById('playersList');
             playersList.innerHTML = '';
             players.forEach((player, index) => {
+                let history = player.history ? player.history.join(', ') : '';
                 playersList.innerHTML += `
                     <div class="player">
-                        <span onclick="editName(${index})">${player.name}: ${player.score}</span>
-                        <span class="arrow" onclick="changeScore(${index})">⬆️</span>
+                        <div class="history">History: ${history}</div>
+                        <div class="score">Score: ${player.score}</div>
+                        <span onclick="editName(${index})">${player.name}</span>
+                        <button class="submit-button" onclick="changeScore(${index})">Submit</button>
                     </div>`;
             });
         }
 
         function addPlayer() {
-            const playerName = prompt("Enter player name:");
-            if (playerName) {
-                players.push({ name: playerName, score: 0 });
-                savePlayers();
-                renderPlayers();
-            }
+            const playerName = prompt("Enter player name:") || `Player ${players.length + 1}`;
+            players.push({ name: playerName, score: 0, history: [] });
+            savePlayers();
+            renderPlayers();
         }
 
         function removePlayer() {
@@ -88,24 +185,40 @@
             }
         }
 
-        function changeScore(index) {
-            const pointValue = parseInt(document.getElementById('pointValue').value, 10);
-            if (!isNaN(pointValue) && pointValue >= -15 && pointValue <= 15) {
-                players[index].score += pointValue;
-                savePlayers();
-                renderPlayers();
-            } else {
-                alert("Please enter a value between -15 and 15.");
-            }
-        }
-
-        function resetScores() {
+        function resetGame() {
             players = [];
             savePlayers();
             renderPlayers();
         }
 
-        window.onload = renderPlayers;
+        function adjustPoints(amount) {
+            const pointValue = document.getElementById('pointValue');
+            pointValue.value = parseInt(pointValue.value) + amount;
+            updateScoreLabel();
+        }
+
+        function updateScoreLabel() {
+            const label = document.getElementById('scoreLabel');
+            const pointValue = parseInt(document.getElementById('pointValue').value, 10);
+            const scoreMap = {
+                1: "One Pair",
+                2: "Two Pair",
+                3: "Three of a Kind",
+                4: "Straight",
+                5: "Flush",
+                6: "Full House",
+                7: "Four of a Kind",
+                8: "Straight Flush",
+                20: "Royal Flush",
+                15: "Chicago",
+                -15: "Better Luck Next Time"
+            };
+            label.textContent = scoreMap[pointValue] || "";
+        }
+
+        window.onload = function() {
+            renderPlayers();
+        }
     </script>
 </body>
 </html>
