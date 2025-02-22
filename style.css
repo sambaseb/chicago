@@ -37,9 +37,8 @@ body {
   display: flex;
   justify-content: top;
   flex-direction: column;
-  width: 48px;
   border-left: 2px solid var(--border-color);
-  padding-top: 12px;
+  padding: 4px;
   gap: 8px;
 }
 
@@ -119,6 +118,9 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 8px;
 }
 
 .points-selection button
