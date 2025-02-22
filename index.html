@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game Points Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+        }
+        .controls {
+            margin-bottom: 10px;
+        }
+        .arrow {
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Card Game Points Tracker</h1>
+    <div class="controls">
+        <input type="number" id="pointValue" placeholder="Enter points" min="-15" max="15">
+        <button onclick="addPlayer()">+ Add Player</button>
+        <button onclick="removePlayer()">- Remove Player</button>
+    </div>
+    <div id="playersList"></div>
+    <button onclick="resetScores()" style="margin-top: 20px; background-color: red; color: white;">Reset Scores</button>
+
+    <script>
+        let players = JSON.parse(localStorage.getItem('players')) || [];
+
+        function savePlayers() {
+            localStorage.setItem('players', JSON.stringify(players));
+        }
+
+        function renderPlayers() {
+            const playersList = document.getElementById('playersList');
+            playersList.innerHTML = '';
+            players.forEach((player, index) => {
+                playersList.innerHTML += `
+                    <div class="player">
+                        <span onclick="editName(${index})">${player.name}: ${player.score}</span>
+                        <span class="arrow" onclick="changeScore(${index})">⬆️</span>
+                    </div>`;
+            });
+        }
+
+        function addPlayer() {
+            const playerName = prompt("Enter player name:");
+            if (playerName) {
+                players.push({ name: playerName, score: 0 });
+                savePlayers();
+                renderPlayers();
+            }
+        }
+
+        function removePlayer() {
+            if (players.length > 0) {
+                players.pop();
+                savePlayers();
+                renderPlayers();
+            }
+        }
+
+        function editName(index) {
+            const newName = prompt("Edit player name:", players[index].name);
+            if (newName) {
+                players[index].name = newName;
+                savePlayers();
+                renderPlayers();
+            }
+        }
+
+        function changeScore(index) {
+            const pointValue = parseInt(document.getElementById('pointValue').value, 10);
+            if (!isNaN(pointValue) && pointValue >= -15 && pointValue <= 15) {
+                players[index].score += pointValue;
+                savePlayers();
+                renderPlayers();
+            } else {
+                alert("Please enter a value between -15 and 15.");
+            }
+        }
+
+        function resetScores() {
+            players = [];
+            savePlayers();
+            renderPlayers();
+        }
+
+        window.onload = renderPlayers;
+    </script>
+</body>
+</html>
