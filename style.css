@@ -38,8 +38,9 @@ body {
   justify-content: top;
   flex-direction: column;
   width: 48px;
-  background-color: grey;
   border-left: 2px solid var(--border-color);
+  padding-top: 12px;
+  gap: 8px;
 }
 
 .player-container {
@@ -111,13 +112,14 @@ body {
 }
 
 .side-button {
-  font-size: 32px;
+  font-size: 40px;
   border: none;
   background-color: transparent;
   color: black;
   cursor: pointer;
   transition: all 0.2s;
   width: 100%;
+  text-align: center;
 }
 
 .points-selection button
