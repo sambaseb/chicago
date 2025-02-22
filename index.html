@@ -109,12 +109,6 @@
             border: none;
             border-radius: 6px;
             padding: 8px;
-            -moz-appearance: textfield;
-        }
-        .points-selection input::-webkit-outer-spin-button,
-        .points-selection input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
         }
         p#scoreLabel {
             font-size: 18px;
@@ -199,21 +193,26 @@
 
         function updateScoreLabel() {
             const label = document.getElementById('scoreLabel');
-            const pointValue = parseInt(document.getElementById('pointValue').value, 10);
-            const scoreMap = {
-                1: "One Pair",
-                2: "Two Pair",
-                3: "Three of a Kind",
-                4: "Straight",
-                5: "Flush",
-                6: "Full House",
-                7: "Four of a Kind",
-                8: "Straight Flush",
-                20: "Royal Flush",
-                15: "Chicago",
-                -15: "Better Luck Next Time"
-            };
-            label.textContent = scoreMap[pointValue] || "";
+            const pointValue = document.getElementById('pointValue').value;
+            label.textContent = `Score: ${pointValue}`;
+        }
+
+        function changeScore(index) {
+            const pointInput = document.getElementById('pointValue');
+            const pointValue = parseInt(pointInput.value, 10);
+            if (!isNaN(pointValue) && pointValue >= -15 && pointValue <= 20) {
+                players[index].score += pointValue;
+                if (!players[index].history) {
+                    players[index].history = [];
+                }
+                players[index].history.push(pointValue);
+                savePlayers();
+                renderPlayers();
+                updateScoreLabel();
+                pointInput.value = 0;
+            } else {
+                alert("Please enter a value between -15 and 20.");
+            }
         }
 
         window.onload = function() {
