@@ -38,7 +38,8 @@ body {
   justify-content: top;
   flex-direction: column;
   width: 48px;
-  
+  background-color: grey;
+  border-left: 2px solid var(--border-color);
 }
 
 .player-container {
@@ -55,7 +56,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-end;
-  border-right: 2px solid var(--border-color);
+  border-left: 2px solid var(--border-color);
   
   width: 100%;
 }
@@ -113,6 +114,10 @@ body {
   font-size: 32px;
   border: none;
   background-color: transparent;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
 }
 
 .points-selection button
