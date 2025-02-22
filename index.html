@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Chicago</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="wrapper">
+    
+  <div class="container">
+        <div class="player-container" id="playersList"></div>
+       
+  
+        
+    
+    <div class="controls">
+            <button class="side-button"onclick="addPlayer()">+</button>
+            <button class="side-button"onclick="removePlayer()">-</button>
+           
+       <button class="side-button" onclick="resetGame()">⟳</button>
+        </div>
+    
+      
+    </div>
+  
+  
+     <div class="points-selection">
+            <button onclick="adjustPoints(-1)">-</button>
+       <div class="inputandlabel">
+         
+         
+            <input type="number" id="pointValue" value="0" min="-15" max="20" oninput="updateScoreLabel()">
+            <p id="scoreLabel">-</p>
+         </div>
+       <button onclick="adjustPoints(1)">+</button>
+       
+        </div>
+  
+ 
+  
+  </div>
+    <script src="script.js"></script>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

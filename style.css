@@ -1,0 +1,169 @@
+:root {
+  --background-color: #f5f5f5;
+  --text-color: #111;
+  --accent-color: #e27d3e;
+  --card-bg: #ffffff;
+  --border-color: black;
+  --button-bg: #e27d3e;
+  --button-text: #ffffff;
+  --input-bg: #eaeaea;
+}
+
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  text-align: center;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.wrapper {
+   display: flex;
+  flex-direction: column;
+   height: 100svh;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+ height: 100%;
+  align-items: stretch;
+  border-bottom: 2px solid var(--border-color);
+  overflow: hidden;
+}
+
+.controls {
+  display: flex;
+  justify-content: top;
+  flex-direction: column;
+  width: 48px;
+  
+}
+
+.player-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height:100%;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  border-right: 2px solid var(--border-color);
+  
+  width: 100%;
+}
+
+.player span {
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.history {
+  font-size: 28px;
+  line-height: 50px;
+  color: gray;
+  padding: 20px;
+  word-spacing: 1000px;
+}
+
+.score {
+  padding: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  border-bottom: 2px solid var(--border-color);
+  border-top: 2px solid var(--border-color);
+}
+
+
+.submit-button {
+  font-size: 32px;
+  padding: 20px 12px;
+  border: none;
+  
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #d76b2c;
+}
+
+.points-selection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  
+}
+
+.side-button {
+  font-size: 32px;
+  border: none;
+  background-color: transparent;
+}
+
+.points-selection button
+ {
+  font-size: 40px;
+  width: 120px;
+  height: 80px;
+  border: none;
+  border-radius: 1000px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.points-selection button:hover,
+.reset-button:hover {
+  background-color: #d76b2c;
+}
+
+.points-selection input {
+  font-size: 52px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  padding: 2px;
+  font-weight: bold;
+}
+
+
+
+.inputandlabel {
+  width: 100%;
+}
+
+p#scoreLabel {
+  font-size: 18px;
+  font-weight: bold;
+  color: grey;
+  margin: 1px;
+}
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
