@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Chicago</title>
-    <link rel="stylesheet" href="./style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <!-- partial:index.partial.html -->
-    <div class="wrapper">
-      <div class="container">
-        <div class="player-container" id="playersList"></div>
 
-        <div class="controls">
-          <button class="side-button" onclick="addPlayer()">+</button>
-          <button class="side-button" onclick="removePlayer()">-</button>
-          <button class="side-button" onclick="resetGame()">☠</button>
-          <button class="side-button" onclick="undo()">☜</button>
-        </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Chicago</title>
+  <link rel="stylesheet" href="./style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+</head>
 
-      <div class="points-selection">
-        <button onclick="adjustPoints(-1)">-</button>
-        <div class="inputandlabel">
-          <input
-            type="number"
-            id="pointValue"
-            value="0"
-            min="-15"
-            max="20"
-            oninput="updateScoreLabel()"
-          />
-          <p id="scoreLabel">-</p>
-        </div>
-        <button onclick="adjustPoints(1)">+</button>
+<body>
+  <!-- partial:index.partial.html -->
+  <div class="wrapper">
+    <div class="container">
+      <div class="player-container" id="playersList"></div>
+
+      <div class="controls">
+        <button class="side-button" onclick="addPlayer()">+</button>
+        <button class="side-button" onclick="removePlayer()">-</button>
+        <button class="side-button" onclick="resetGame()">☠</button>
+        <button class="side-button" onclick="undo()">☜</button>
       </div>
     </div>
 
-    <!-- partial -->
-    <script src="./state.js"></script>
-    <script src="./script.js"></script>
-  </body>
+    <div class="points-selection">
+      <button onclick="adjustPoints(-1)">-</button>
+      <div class="inputandlabel">
+        <input type="number" id="pointValue" value="0" min="-15" max="20" oninput="updateScoreLabel()" />
+        <p id="scoreLabel">-</p>
+      </div>
+      <button onclick="adjustPoints(1)">+</button>
+    </div>
+  </div>
+
+  <!-- partial -->
+  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+  <script src="./confetti.js"></script>
+  <script src="./state.js"></script>
+  <script src="./script.js"></script>
+</body>
+
 </html>

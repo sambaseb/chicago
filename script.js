@@ -30,11 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function removePlayer() {
-    if (players.length > 0) {
-      players.pop()
+    const playerName = prompt('Enter player name to remove:')
+    gameState.removePlayer(playerName)
 
-      renderPlayers()
-    }
+    renderPlayers()
   }
 
   function editName(index) {
@@ -94,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!isNaN(pointValue) && pointValue >= -15 && pointValue <= 20) {
       gameState.addScore(index, pointValue)
+
+      if (pointValue === 15) {
+        window.shootConfetti()
+      }
 
       renderPlayers()
       updateScoreLabel()
