@@ -52,6 +52,12 @@ window.gameState = {
     storage.set(_state)
   },
 
+  removePlayer(name) {
+    _state.history.push(copyObject(_state.current))
+    _state.current = _state.current.filter(player => player.name !== name)
+    storage.set(_state)
+  },
+
   addScore(player, score) {
     // save the current state in the history
     _state.history.push(copyObject(_state.current))
