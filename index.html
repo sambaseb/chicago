@@ -9,31 +9,46 @@
 </head>
 
 <body>
-  <!-- partial:index.partial.html -->
   <div class="wrapper">
     <div class="container">
       <div class="player-container" id="playersList"></div>
 
       <div class="controls">
-        <button class="side-button" onclick="addPlayer()">+</button>
-        <button class="side-button" onclick="removePlayer()">-</button>
-        <button class="side-button" onclick="resetGame()">☠</button>
-        <button class="side-button" onclick="undo()">☜</button>
+        <button class="side-button" onclick="addPlayer()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
+            <path d="M128 2.56c-96.5638 0 -156.9161 104.5333 -108.6342 188.16 48.2818 83.6267 168.9865 83.6267 217.2684 0C247.6439 171.6507 253.44 150.0193 253.44 128 253.3536 58.7572 197.2428 2.6464 128 2.56Zm48.2461 135.0892h-38.5969v38.5969c0 7.428 -8.041 12.0705 -14.4738 8.3565 -2.9855 -1.7236 -4.8246 -4.9091 -4.8246 -8.3565v-38.5969h-38.597c-7.4279 -0.0003 -12.0705 -8.0415 -8.3562 -14.4742 1.7237 -2.9853 4.9091 -4.8242 8.3562 -4.8242h38.597v-38.597c0 -7.4279 8.041 -12.0704 14.4738 -8.3564 2.9855 1.7236 4.8246 4.9091 4.8246 8.3564v38.597h38.5969c7.428 0 12.0705 8.041 8.3565 14.4738 -1.7236 2.9854 -4.9093 4.8245 -8.3565 4.8246Z" stroke-width="1"></path>
+          </svg>
+        </button>
+        <button class="side-button" onclick="removePlayer()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
+            <path d="M128 2.56c-96.5638 0 -156.9161 104.5333 -108.6342 188.16 48.2818 83.6267 168.9865 83.6267 217.2684 0C247.6439 171.6507 253.44 150.0193 253.44 128 253.3669 58.7517 197.2483 2.6332 128 2.56Zm48.2461 135.0892H79.7538c-7.4279 0 -12.0704 -8.041 -8.3564 -14.4738 1.7236 -2.9854 4.9093 -4.8245 8.3564 -4.8246h96.4924c7.4279 0.0003 12.0705 8.0415 8.3562 14.4742 -1.7237 2.9853 -4.9091 4.8242 -8.3562 4.8242Z" stroke-width="1"></path>
+          </svg>
+        </button>
+        <button class="side-button" onclick="resetGame()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.925 18.577" fill="currentColor">
+            <path d="M18.5734 9.29438C18.5734 14.4075 14.4039 18.577 9.28266 18.577C4.16953 18.577 0 14.4075 0 9.29438C0 4.18125 4.16953 0.0117188 9.28266 0.0117188C14.4039 0.0117188 18.5734 4.18125 18.5734 9.29438Z" />
+          </svg>
+        </button>
       </div>
     </div>
 
     <div class="points-selection">
-      <button onclick="adjustPoints(-1)">-</button>
+      <button onclick="adjustPoints(-1)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
+          <path d="M128 2.56c-96.5638 0 -156.9161 104.5333 -108.6342 188.16 48.2818 83.6267 168.9865 83.6267 217.2684 0C247.6439 171.6507 253.44 150.0193 253.44 128 253.3669 58.7517 197.2483 2.6332 128 2.56Zm45.4237 141.9161 -38.5969 38.5969c-3.7691 3.7733 -9.8845 3.7733 -13.6536 0l-38.597 -38.5969c-5.2552 -5.2553 -2.8508 -14.2289 4.3281 -16.1525 3.3317 -0.8927 6.8866 0.0598 9.3256 2.4988l22.1209 22.1329V79.7538c0 -7.4279 8.041 -12.0704 14.4738 -8.3564 2.9855 1.7236 4.8246 4.9091 4.8246 8.3564v73.2015l22.1209 -22.1329c5.2553 -5.2553 14.2289 -2.8508 16.1524 4.328 0.8928 3.3318 -0.0598 6.8867 -2.4988 9.3257Z" stroke-width="1"></path>
+        </svg>
+      </button>
       <div class="inputandlabel">
         <input type="number" id="pointValue" value="0" min="-15" max="20" oninput="updateScoreLabel()" />
         <p id="scoreLabel">-</p>
       </div>
-      <button onclick="adjustPoints(1)">+</button>
+      <button onclick="adjustPoints(1)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
+          <path d="M128 2.56c-96.5638 0 -156.9161 104.5333 -108.6342 188.16" />
+        </svg>
+      </button>
     </div>
   </div>
-
-  <!-- partial -->
-  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   <script src="./confetti.js"></script>
   <script src="./state.js"></script>
   <script src="./script.js"></script>
