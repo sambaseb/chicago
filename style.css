@@ -126,16 +126,17 @@ body {
 }
 
 .points-selection button {
-  font-size: 40px;
-  width: 80px;
-  height: 80px;
-  border: none;
+  padding: 8px;
+  display: flex;  
+  align-items: center;
   border-radius: 1000px;
+  border-width: 0px;
   background-color: var(--button-bg);
   color: var(--button-text);
   cursor: pointer;
   transition: all 0.2s;
 }
+
 
 .points-selection button:hover {
   background-color: #d76b2c;
