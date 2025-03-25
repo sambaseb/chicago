@@ -1,8 +1,4 @@
 window.shootConfetti = () => {
-  function randomInRange(min, max) {
-    return Math.random() * (max - min) + min
-  }
-
   const defaults = {
     spread: 160,
     ticks: 0,
