@@ -11,12 +11,20 @@
   --input-bg: #eaeaea;
 }
 
+html, body {
+  touch-action: manipulation;
+}
+
 body {
   font-family: "Helvetica Neue", sans-serif;
   text-align: center;
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+button {
+  touch-action: manipulation;
 }
 
 .wrapper {
