@@ -2,6 +2,7 @@
  * constants
  */
 const INITIAL_STATE = {
+  value: 0,
   current: [], // the score rendered on screen
   history: [], // a list of all previous scores/states
 }
@@ -77,6 +78,16 @@ window.gameState = {
 
     storage.set(_state)
   },
+
+  getCurrentSelection() {
+    return _state.value
+  },
+  
+  setCurrentSelection(value) {
+    _state.value = value
+    storage.set(_state)
+    return _state.value
+  }
 }
 
 /**
